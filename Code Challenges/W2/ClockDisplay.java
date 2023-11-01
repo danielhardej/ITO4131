@@ -65,6 +65,11 @@ public class ClockDisplay
         return this.seconds.getValue();
     }
 
+    public ClockDisplay getTime()
+    {
+        return this;
+    }
+
     // Mutator Methods for each field.
     public void setClock(int seconds) {
         this.setHours(seconds / 3600);
@@ -90,7 +95,6 @@ public class ClockDisplay
     // A method called showTime(), which displays the time in the format hh:mm:ss.
     public void showTime()
     {
-
         System.out.println(this.getHours().getValue() + ":" + this.getMinutes().getValue() + ":" + this.getSeconds().getValue());
     }
 
@@ -102,6 +106,19 @@ public class ClockDisplay
             this.seconds.getValue() - clock.getSecondsAsInt()
         );
         return newClock;
+    }
+
+    public void timeTick()
+    {
+        seconds.increment();
+        if (seconds.getValue() == 0)
+        {
+            minutes.increment();
+            if (minutes.getValue() == 0)
+            {
+                hours.increment();
+            }
+        }
     }
 
     public void tickDown() 
