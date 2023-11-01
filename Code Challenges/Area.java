@@ -10,7 +10,7 @@ public class Area {
 
     public double areaTriangle(int base, int height)
     {
-        return 0.5 * base * height;
+        return (base * height) / 2;
     }
 
     public static void main(String[] args)
