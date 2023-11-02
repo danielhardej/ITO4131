@@ -25,16 +25,19 @@ public class ClockDemo {
             firstClock.timeTick();
             firstClock.showTime();
         }
-        ClockDisplay secondClock = new ClockDisplay(12, 45, 50);
-        secondClock.showTime();
-        for (int i = 0; i < 15; i++) {secondClock.timeTick();}
+        ClockDisplay secondClock = new ClockDisplay(23, 59, 51);
+        
+        for (int i = 0; i < 10; i++) 
+        {
+            secondClock.timeTick();
+            secondClock.showTime();
+        }
 
         System.out.println("First clock: ");
         firstClock.showTime();
 
         System.out.println("Second clock: ");
         secondClock.showTime();
-
         
     }
 }

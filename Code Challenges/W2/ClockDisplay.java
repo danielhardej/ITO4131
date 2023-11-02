@@ -123,9 +123,15 @@ public class ClockDisplay
 
     public void tickDown() 
     {
-        //  decreases the seconds by 1 and then updates display
-        this.seconds.decrement();
-        this.showTime();
+        seconds.decrement();
+        if (seconds.getValue() == 59)
+        {
+            minutes.decrement();
+            if (minutes.getValue() == 59)
+            {
+                hours.decrement();
+            }
+        }
     }
     
 }
