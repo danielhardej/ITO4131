@@ -36,7 +36,12 @@ public class Student
         return email;
     }
 
-    public String getPhone()
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getPhoneNumber()
     {
         return phone;
     }
@@ -49,6 +54,11 @@ public class Student
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public void setName(String newName)
+    {
+        this.name = newName;
     }
 
     public void setPhone(String phone)
