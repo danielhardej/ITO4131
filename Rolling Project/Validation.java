@@ -75,7 +75,7 @@ public class Validation
      */
     public boolean validateDate(String date)
     {
-        return date.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}");
+        return date.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}") || date.matches("[0-9]{1,2} [A-Z][a-z]{3} [0-9]{4}");
     }
 
     /**
@@ -86,6 +86,11 @@ public class Validation
     public boolean validateEmail(String email)
     {
         return email.matches("[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]+");
+    }
+
+    public boolean validateNumUnits(int numUnits)
+    {
+        return numUnits >= 1 && numUnits <= 10;
     }
 
     /**
