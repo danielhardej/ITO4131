@@ -1,3 +1,13 @@
+/**
+ * FileIO class
+ * 
+ * This class is used to read and write to files.
+ * 
+ * @version 1.0
+ * @author Daniel Hardej
+ * Last updated: 2023-11-22
+ */
+
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -23,6 +33,28 @@ public class FileIO {
     {
         return this.FILE_NAME;
     }
+
+    public int getNumLines(String fileName)
+    {
+        int numLines = 0;
+        try {
+            FileReader file = new FileReader(fileName);
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                fileScanner.nextLine();
+                numLines++;
+            }
+            file.close();
+            fileScanner.close();
+        }
+        catch (FileNotFoundException e) {
+            System.err.println(FILE_NAME + " not found: " + e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println("Error in reading file: " + e.getMessage());
+        }
+        return numLines;
+    } 
 
     public String readFile()
     {
@@ -103,25 +135,38 @@ public class FileIO {
         }
     }
 
+    public void writeFile(String fileContents)
+    {
+        try
+        {   
+            PrintWriter writer = new PrintWriter(outputFile);
+            try
+            {
+                // code to write string to file goes here
+                writer.println(fileContents);
+            }
+            finally
+            {
+                try
+                {
+                    writer.close();
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Error message 1");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error message 2");
+        }
+    }
+
     public static void main(String[] args)
     {
-        try {
-            FileIO fileIO = new FileIO();
-            String fileContents = fileIO.readFile();
-            for (String line : fileContents.split("\n")) {
-                System.out.println(line);
-            }
-
-            ArrayList<Enrolment> enrolmentsList = fileIO.readFile("students.txt");
-            for (Enrolment enrolment : enrolmentsList) {
-                System.out.println(enrolment.display());
-            }
-
-
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
+        FileIO fileIO = new FileIO();
+        int numLines = fileIO.getNumLines("students.txt");
+        System.out.println(numLines);
     }
 }
