@@ -44,6 +44,44 @@ public class University
         }
     }
 
+    public void changeUnitEnrolment(String changeUnitInput) {
+        String[] fields = changeUnitInput.split(",");
+        if (fields.length != 5) {
+            System.out.println("Invalid input. Expected 5 fields, got " + fields.length);
+            return;
+        }
+
+        String name = fields[0].trim();
+        String unit1Code = fields[1].trim();
+        String unit2Code = fields[2].trim();
+        String unit2Description = fields[3].trim();
+        int unit2CreditPoints;
+
+        try {
+            unit2CreditPoints = Integer.parseInt(fields[4].trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input for new unit credit points: " + fields[4]);
+            return;
+        }
+
+        for (Enrolment enrolment : enrolments) {
+            if (enrolment.getStudent().getName().equals(name)) {
+                ArrayList<Unit> units = new ArrayList<>(enrolment.getUnits());
+                for (int i = 0; i < units.size(); i++) {
+                    if (units.get(i).getUnitCode().equals(unit1Code)) {
+                        units.remove(i);
+                        units.add(new Unit(unit2Code, unit2Description, unit2CreditPoints));
+                        System.out.println("Successfully changed enrolment for " + name);
+                        return;
+                    }
+                }
+                System.out.println("Student " + name + " is not enrolled in unit " + unit1Code);
+                return;
+            }
+        }
+        System.out.println("No enrolment found for student " + name);
+    }
+
     public ArrayList<Enrolment> getEnrolments()
     {
         return enrolments;
